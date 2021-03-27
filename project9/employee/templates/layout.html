@@ -1,0 +1,247 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dashboard </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content=" Admin Dashboard" name="description" />
+    <meta content=" Admin Dashboard" name="author" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.1/css/unicons.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+    {% block stylesheets %}{% endblock stylesheets %}
+    <!-- Bootstrap Css -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{% static 'assets/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js">
+
+</head>
+
+
+<body>
+
+    <!-- <body data-layout="horizontal" data-topbar="colored"> -->
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="{% url 'dashboard' %}" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="{% static 'assets/images/logo-sm.png' %}" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="{% static 'assets/images/logo-dark.png' %}" alt="" height="20">
+                            </span>
+                        </a>
+
+                        <a href="{% url 'dashboard' %}" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="{% static 'assets/images/logo-sm.png' %}" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="{% static 'assets/images/logo-light.png' %}" alt="" height="20">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button"
+                        class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+                </div>
+
+                <div class="d-flex">
+
+                    <div class="dropdown d-inline-block d-lg-none ms-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="uil-search"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                            aria-labelledby="page-header-search-dropdown">
+
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..."
+                                            aria-label="Recipient's username">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i
+                                                    class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- <div class="dropdown d-none d-lg-inline-block ms-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            data-bs-toggle="fullscreen">
+                            <i class="uil-minus-path"></i>
+                        </button>
+                    </div> -->
+
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user"
+                                src="https://eliaslealblog.files.wordpress.com/2014/03/user-200.png"
+                                alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">{{ request.user }}</span>
+                            <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a class="dropdown-item" href="#"><i
+                                    class="uil uil-user-circle font-size-18 align-middle text-muted me-1 "></i> <span
+                                    class="align-middle">View Profile</span></a>
+                            <a class="dropdown-item" href="/accounts/logout/"><i
+                                    class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span
+                                    class="align-middle">Sign out</span></a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                            <i class="uil-cog"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a href="{% url 'dashboard' %}" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="{% static 'assets/images/logo-sm.png' %}" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="{% static 'assets/images/logo-dark.png' %}" alt="" height="20">
+                    </span>
+                </a>
+            </div>
+
+            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
+
+            <div data-simplebar class="sidebar-menu-scroll">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title">Menu</li>
+
+                        <li>
+                            <a href="{% url 'dashboard' %}">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'admin-read' %}">
+                                <i class="fad fa-users-cog"></i>
+                                <span>Admins</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'excel-uploads' %}">
+                                <i class="fas fa-chart-area"></i>
+                                <span>Data Analysis </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <div class="main-content">
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page-content -->
+        <!-- ============================================================== -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © xxxx.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- JAVASCRIPT -->
+    <script src="{% static 'assets/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/libs/metismenu/metisMenu.min.js' %}"></script>
+    <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'assets/libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static 'assets/libs/waypoints/lib/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/libs/jquery.counterup/jquery.counterup.min.js' %}"></script>
+
+    <!-- apexcharts -->
+    <script src="{% static 'assets/libs/apexcharts/apexcharts.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/pages/dashboard.init.js' %}"></script>
+
+
+    {% block scripts %} {% endblock scripts %}
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+    <!-- <script>
+setTimeout(function(){
+    if($('#msg').length>0){
+        $('#msg').remove();
+    }
+},2000
+)
+</script> -->
+
+</body>
+
+
+</html>

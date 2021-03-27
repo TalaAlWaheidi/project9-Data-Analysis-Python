@@ -1,0 +1,178 @@
+{% extends "./layout.html" %}
+{% load static %}
+{% block stylesheets %}
+<link href="{% static 'assets/libs/dropzone/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+    type="text/css" />
+<link href="{% static 'assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+    type="text/css" />
+
+<!-- Responsive datatable examples -->
+<link href="{% static 'assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet"
+    type="text/css" />
+{% endblock stylesheets %}
+{% block content %}
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">Data Upload</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3 row">
+                                <label class="col-md-3 col-form-label">Data Source</label>
+                                <div class="col-md-9">
+                                    <select name="Data_source" class="form-select">
+                                        <option value="new york">new york</option>
+                                        <option value="washington">washington dc</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-md-3 col-form-label">Upload File</label>
+                                <div class="col-md-9">
+                                    <input type="file" class="" name="myfile">
+
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-md" type="submit">Submit</button>
+                    </div>
+
+                    </form>
+                </div>
+
+            </div> <!-- end col -->
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Execution Time </h4>
+                        <p>{{result}}</p>
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Datatable</h4>
+
+                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable"
+                                class="table table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                                style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
+                                aria-describedby="datatable_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            colspan="1" style="width: 190px;" aria-sort="ascending"
+                                            aria-label="Name: activate to sort column descending">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            colspan="1" style="width: 285px;"
+                                            aria-label="Position: activate to sort column ascending">
+                                            City</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            colspan="1" style="width: 140px;"
+                                            aria-label="Office: activate to sort column ascending">
+                                            Primary PV Module Manufacturer</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            colspan="1" style="width: 66px;"
+                                            aria-label="Age: activate to sort column ascending">Total Nameplate kW DC
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            colspan="1" style="width: 66px;"
+                                            aria-label="Age: activate to sort column ascending">
+                                            Date Application Received
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            colspan="1" style="width: 66px;"
+                                            aria-label="Age: activate to sort column ascending">Date Completed
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            colspan="1" style="width: 66px;"
+                                            aria-label="Age: activate to sort column ascending">PV Module Model Number
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            colspan="1" style="width: 66px;"
+                                            aria-label="Age: activate to sort column ascending">Project Status
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for person in persons %}
+                                    <tr role="row" class="odd">
+                                        <td class="sorting_1 dtr-control">{{ person.id }}</td>
+                                        <td>{{ person.City }}</td>
+                                        <td>{{ person.Primary_PV_Module_Manufacturer }}</td>
+                                        <td>{{ person.Expected_KWh_Annual_Production }}</td>
+                                        <td>{{ person.Date_Completed }}</td>
+                                        <td>{{ person.Project_Status }}</td>
+                                        <td>{{ person.Project_Cost }}</td>
+                                        <td>
+                                            {% if person.Contractor == 'Complete' %}
+                                            <span
+                                                class="badge rounded-pill bg-soft-success font-size-12">Complete</span>
+                                            {% else %}
+                                            <span class="badge rounded-pill bg-soft-danger font-size-12">Not
+                                                Complete</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div> <!-- container-fluid -->
+</div>
+<!-- End Page-content -->
+
+{% block scripts %}
+<script src="{% static 'assets/libs/dropzone/min/dropzone.min.js' %}"></script>
+<script src="{% static 'assets/libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<!-- Buttons examples -->
+<script src="{% static 'assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/libs/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'assets/libs/pdfmake/build/pdfmake.min.js' %}"></script>
+<script src="{% static 'assets/libs/pdfmake/build/vfs_fonts.js' %}"></script>
+<script src="{% static 'assets/libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'assets/libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'assets/libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+<!-- Responsive examples -->
+<script src="{% static 'assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+<!-- Datatable init js -->
+<script src="{% static 'assets/js/pages/datatables.init.js ' %}"></script>
+{% endblock scripts %}
+{% endblock content %}

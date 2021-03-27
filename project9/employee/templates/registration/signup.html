@@ -1,0 +1,103 @@
+{% extends "../layout.html" %}
+{% load static %}
+
+{% block content %}
+
+
+  <div class="page-content">
+      <div class="container-fluid">
+
+          <div class="row">
+              <div class="col-xl-3"></div>
+              <div class="col-xl-6">
+                  <div class="card">
+                      <div class="card-body">
+                          <h2 class="text-center">Add Admin </h2>
+                          <form class="needs-validation" novalidate method="POST">
+                              {% csrf_token %}
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="mb-3">
+                                          <label class="form-label" for="validationCustom01">Name</label>
+                                          <!-- {{ form.username }} -->
+                                          <input type="text" class="form-control" placeholder="your name"
+                                              id="id_ename" name="username" value="" required>
+                                          <div class="valid-feedback">
+                                              Looks good!
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <div class="mb-3">
+                                          <label class="form-label" for="validationCustom02">E-mail</label>
+                                          <!-- {{ form.email }} -->
+                                          <input type="email" class="form-control" id="id_eemail"
+                                              placeholder="Enter Your Email" name="email" value="" required>
+                                          <div class="valid-feedback">
+                                              Looks good!
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="mb-3">
+                                          <label class="form-label" for="validationCustom03">Password</label>
+                                          <!-- {{ form.password1 }} -->
+                                          <input type="password" name="password1" class="form-control" id="id_econtact"
+                                              placeholder="Enter Your Password" required>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <div class="mb-3">
+                                          <label class="form-label" for="validationCustom04">Confirm Password</label>
+                                          <!-- {{ form.password2 }} -->
+                                          <input type="password" class="form-control" id="id_password" name="password2"
+                                              placeholder="Confirm Password" required>
+                                      </div>
+                                  </div>
+                              </div>
+                              <button class="btn btn-primary" type="submit">Submit form</button>
+                          </form>
+                      </div>
+                  </div>
+                  <!-- end card -->
+              </div>
+              <!-- end col -->
+          </div>
+
+
+      </div>
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form method="post">
+  {% csrf_token %}
+  {{ form.username }}
+  {{ form.email }}
+ {{ form.password1 }}
+ {{ form.password2 }}
+  <input type="submit" value="login" />
+</form> -->
+
+
+{% endblock %}

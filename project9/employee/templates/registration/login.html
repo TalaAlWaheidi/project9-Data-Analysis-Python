@@ -1,0 +1,121 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dashboard </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content=" Admin Dashboard" name="description" />
+    <meta content=" Admin Dashboard" name="author" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+    {% block stylesheets %}{% endblock stylesheets %}
+    <!-- Bootstrap Css -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{% static 'assets/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+</head>
+
+
+<body>
+
+
+
+    <!-- {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %} -->
+
+    {% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+    {% endif %}
+
+
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-xl-2"></div>
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'assets/images/logologin.png' %}" alt="" height="120"
+                                    class="logo logo-dark mx-auto  mb-3 align-items-center">
+                                <h2 class="text-center">LogIN </h2>
+                                <form method="post" action="{% url 'login' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="validationCustom01">Name</label>
+                                                <!-- {{ form.username }} -->
+                                                <input type="text" class="form-control" placeholder="Enter Your Name"
+                                                    id="id_ename" name="username" value="" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="validationCustom03">Password</label>
+                                                <!-- {{ form.password1 }} -->
+                                                <input type="password" name="password" class="form-control"
+                                                    id="id_econtact" placeholder="Enter Your Password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">LogIn</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+                </div>
+
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+    </div>
+    <!-- End Page-content -->
+    <!-- JAVASCRIPT -->
+    <script src="{% static 'assets/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/libs/metismenu/metisMenu.min.js' %}"></script>
+    <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'assets/libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static 'assets/libs/waypoints/lib/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/libs/jquery.counterup/jquery.counterup.min.js' %}"></script>
+
+    <!-- apexcharts -->
+    <script src="{% static 'assets/libs/apexcharts/apexcharts.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/pages/dashboard.init.js' %}"></script>
+
+
+    {% block scripts %} {% endblock scripts %}
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+</body>
+
+
+</html>

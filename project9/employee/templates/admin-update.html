@@ -1,0 +1,72 @@
+{% extends "./layout.html" %}
+{% load static %}
+{% block content %}
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                {{ message }}
+                </div>
+            <div class="row">
+                <div class="col-xl-3"></div>
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="text-center">Update Admin </h2>
+                            <form method="POST" class="needs-validation" novalidate action="/update/{{employee.id}}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="validationCustom01">Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter Your Name"
+                                                id="id_ename" name="username" value="{{ employee.username }}" required>
+                                            <div class=" valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="validationCustom02">E-mail</label>
+                                            <input type="email" class="form-control" id="id_eemail"
+                                                placeholder="Enter Your E-mail" name="email" value="{{ employee.email }}"
+                                                required>
+                                            <div class=" valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="validationCustom03">Password</label>
+                                            <input type="password" name="password1" class="form-control" id="id_econtact"
+                                                placeholder="Enter Your Password" required>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="validationCustom04">Confirm Password</label>
+                                            <input type="password" class="form-control" id="id_password" name="password2"
+                                                placeholder="Enter Your Confirm Password" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class=" btn btn-primary" type="submit">Update form</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+            </div>
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+    {% endblock content %}
